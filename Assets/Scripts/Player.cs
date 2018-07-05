@@ -39,7 +39,7 @@ public class Player : MonoBehaviour {
 
 	// Rigidbody physics should be done in FixedUpdate
 	void FixedUpdate () {
-        print("RequestJump: " + requestJump + " CanJump: " + canJump + " CanDoubleJump: " + canDoubleJump);
+        //print("RequestJump: " + requestJump + " CanJump: " + canJump + " CanDoubleJump: " + canDoubleJump);
 
         // Get input
         float hor = Input.GetAxis("Horizontal");
