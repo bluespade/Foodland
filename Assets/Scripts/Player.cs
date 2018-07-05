@@ -11,6 +11,9 @@ public class Player : MonoBehaviour {
         DoubleJumping,
     }
 
+    public int maxHealth;
+    private int health;
+
     private Rigidbody2D rb;
     private SpriteRenderer sr;
     private float horizontalSpeed = 7;
@@ -19,6 +22,7 @@ public class Player : MonoBehaviour {
     private bool canJump = true;
     private bool canDoubleJump = true;
     private bool jumping = false;
+    private bool isAlive = true;
 
     //Attack variables and references
     private GameObject attackPoint;
@@ -36,6 +40,8 @@ public class Player : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        health = maxHealth;
+
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
 
@@ -50,61 +56,64 @@ public class Player : MonoBehaviour {
 	
     void Update ()
     {
-        bool jumpButtonDownPressed = Input.GetKeyDown(KeyCode.Space);
-
-        requestJump = (requestJump || jumpButtonDownPressed) ? true : false;
-
-        float hor = Input.GetAxis("Horizontal");
-        float ver = Input.GetAxis("Vertical");
-
-        //Attack handling
-        if (canAttack)
+        if (isAlive)
         {
-            if (hor > 0)
-            {
-                attackPointOffset = new Vector2(0.65f, 0f);
-                attackPointRotation = Quaternion.Euler(new Vector3(0f, 0f, 180f));
-            }
-            else
-            {
-                attackPointOffset = new Vector2(-0.65f, 0f);
-                attackPointRotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
-            }
+            bool jumpButtonDownPressed = Input.GetKeyDown(KeyCode.Space);
 
-            if (ver > 0)
-            {
-                attackPointOffset = new Vector2(0f, 0.8f);
-                attackPointRotation = Quaternion.Euler(new Vector3(0f, 0f, 90f));
-            }
-        }
+            requestJump = (requestJump || jumpButtonDownPressed) ? true : false;
 
-        attackPoint.transform.localPosition = attackPointOffset;
-        attackPoint.transform.localRotation = attackPointRotation;
+            float hor = Input.GetAxis("Horizontal");
+            float ver = Input.GetAxis("Vertical");
 
-        if (!canAttack)
-        {
-            attackTimer += Time.deltaTime;
-            //If the attack hitbox has been active for the specified amount of time...
-            if (attackTimer >= attackHitboxActiveTime)
-            {
-                //...then reset the timer to 0, reset attack point collider and renderer, and enable attacking.
-                canAttack = true;
-                attackTimer = 0f;
-
-                attackPointCollider.enabled = false;
-                attackPointRenderer.enabled = false;
-            }
-        }
-
-        //Get player attack input
-        if (Input.GetMouseButtonDown(0))
-        {
-            //If we can attack, show weapon and enable the attack hitbox
+            //Attack handling
             if (canAttack)
             {
-                attackPointCollider.enabled = true;
-                attackPointRenderer.enabled = true;
-                canAttack = false;
+                if (hor > 0)
+                {
+                    attackPointOffset = new Vector2(0.65f, 0f);
+                    attackPointRotation = Quaternion.Euler(new Vector3(0f, 0f, 180f));
+                }
+                else
+                {
+                    attackPointOffset = new Vector2(-0.65f, 0f);
+                    attackPointRotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
+                }
+
+                if (ver > 0)
+                {
+                    attackPointOffset = new Vector2(0f, 0.8f);
+                    attackPointRotation = Quaternion.Euler(new Vector3(0f, 0f, 90f));
+                }
+            }
+
+            attackPoint.transform.localPosition = attackPointOffset;
+            attackPoint.transform.localRotation = attackPointRotation;
+
+            if (!canAttack)
+            {
+                attackTimer += Time.deltaTime;
+                //If the attack hitbox has been active for the specified amount of time...
+                if (attackTimer >= attackHitboxActiveTime)
+                {
+                    //...then reset the timer to 0, reset attack point collider and renderer, and enable attacking.
+                    canAttack = true;
+                    attackTimer = 0f;
+
+                    attackPointCollider.enabled = false;
+                    attackPointRenderer.enabled = false;
+                }
+            }
+
+            //Get player attack input
+            if (Input.GetMouseButtonDown(0))
+            {
+                //If we can attack, show weapon and enable the attack hitbox
+                if (canAttack)
+                {
+                    attackPointCollider.enabled = true;
+                    attackPointRenderer.enabled = true;
+                    canAttack = false;
+                }
             }
         }
     }
@@ -162,6 +171,21 @@ public class Player : MonoBehaviour {
 
         // Reset jump capability
         canJump = false;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        isAlive = false;
+        //Nothing else yet. Do game over stuff in here or whatever.
     }
     
     void OnCollisionEnter2D(Collision2D collision)
