@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-    private int health = 10;
+    public int maxHealth = 10;
+    private int health;
 
 	// Use this for initialization
 	void Start () {
-		
+        health = maxHealth;
 	}
 	
 	// Update is called once per frame
@@ -22,6 +23,12 @@ public class Enemy : MonoBehaviour {
         if (health <= 0)
         {
             print("i am dead");
+            Die();
         }
+    }
+
+    public void Die()
+    {
+        GameObject.Destroy(gameObject);
     }
 }
