@@ -58,21 +58,24 @@ public class Player : MonoBehaviour {
         float ver = Input.GetAxis("Vertical");
 
         //Attack handling
-        if (hor > 0)
+        if (canAttack)
         {
-            attackPointOffset = new Vector2(0.65f, 0f);
-            attackPointRotation = Quaternion.Euler(new Vector3(0f, 0f, 180f));
-        }
-        else
-        {
-            attackPointOffset = new Vector2(-0.65f, 0f);
-            attackPointRotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
-        }
+            if (hor > 0)
+            {
+                attackPointOffset = new Vector2(0.65f, 0f);
+                attackPointRotation = Quaternion.Euler(new Vector3(0f, 0f, 180f));
+            }
+            else
+            {
+                attackPointOffset = new Vector2(-0.65f, 0f);
+                attackPointRotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
+            }
 
-        if (ver > 0)
-        {
-            attackPointOffset = new Vector2(0f, 0.8f);
-            attackPointRotation = Quaternion.Euler(new Vector3(0f, 0f, 90f));
+            if (ver > 0)
+            {
+                attackPointOffset = new Vector2(0f, 0.8f);
+                attackPointRotation = Quaternion.Euler(new Vector3(0f, 0f, 90f));
+            }
         }
 
         attackPoint.transform.localPosition = attackPointOffset;
