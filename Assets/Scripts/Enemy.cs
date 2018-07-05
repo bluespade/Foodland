@@ -13,14 +13,15 @@ public class Enemy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (health <= 0)
-        {
-            print("i am dead");
-        }
+		
 	}
 
     public void TakeDamage(int damage)
     {
         health -= damage;
+        if (health <= 0)
+        {
+            print("i am dead");
+        }
     }
 }
