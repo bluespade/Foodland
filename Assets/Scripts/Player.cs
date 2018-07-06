@@ -58,8 +58,7 @@ public class Player : MonoBehaviour {
     {
         if (isAlive)
         {
-            bool jumpButtonDownPressed = Input.GetKeyDown(KeyCode.Space);
-
+            bool jumpButtonDownPressed = Input.GetButtonDown("Jump");
             requestJump = (requestJump || jumpButtonDownPressed) ? true : false;
 
             float hor = Input.GetAxis("Horizontal");
@@ -105,7 +104,7 @@ public class Player : MonoBehaviour {
             }
 
             //Get player attack input
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetButtonDown("Fire1"))
             {
                 //If we can attack, show weapon and enable the attack hitbox
                 if (canAttack)
@@ -125,9 +124,9 @@ public class Player : MonoBehaviour {
         // Get input
         float hor = Input.GetAxis("Horizontal");
         float ver = Input.GetAxis("Vertical");
-        bool jumpButtonDownPressed = Input.GetKeyDown(KeyCode.Space);
+        bool jumpButtonDownPressed = Input.GetButtonDown("Jump");
         requestJump = (requestJump || jumpButtonDownPressed) ? true : false;
-        bool jumpButtonCurrentlyPressed = Input.GetKey(KeyCode.Space);
+        bool jumpButtonCurrentlyPressed = Input.GetButton("Jump");
 
         // Horizontal
         Vector2 velocity = new Vector2(rb.velocity.x, rb.velocity.y);
