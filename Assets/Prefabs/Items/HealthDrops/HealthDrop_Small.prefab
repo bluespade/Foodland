@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 50442525830230846}
   - component: {fileID: 58475164133715226}
   - component: {fileID: 114481551095041798}
+  - component: {fileID: 114864652760541452}
   m_Layer: 0
   m_Name: HealthDrop_Small
   m_TagString: Untagged
@@ -120,6 +121,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9446f01ae77118245bb8195eb51f3e60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114864652760541452
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1801216190753580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85607d6291a6a7346b54b56ead14e660, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healingAmount: 1
 --- !u!198 &198751874464700096
 ParticleSystem:
   m_ObjectHideFlags: 1

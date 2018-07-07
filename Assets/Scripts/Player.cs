@@ -181,6 +181,15 @@ public class Player : MonoBehaviour {
         }
     }
 
+    public void ApplyHealing(int healing)
+    {
+        health += healing;
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+    }
+
     private void Die()
     {
         isAlive = false;
