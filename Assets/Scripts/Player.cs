@@ -11,6 +11,9 @@ public class Player : MonoBehaviour {
         DoubleJumping,
     }
 
+    public int maxHealth;
+    private int health;
+
     private Rigidbody2D rb;
     private SpriteRenderer sr;
     private float horizontalSpeed = 7;
@@ -19,6 +22,17 @@ public class Player : MonoBehaviour {
     private bool canJump = true;
     private bool canDoubleJump = true;
     private bool jumping = false;
+    private bool isAlive = true;
+
+    //Attack variables and references
+    private GameObject attackPoint;
+    private BoxCollider2D attackPointCollider;
+    private Vector2 attackPointOffset;
+    private Quaternion attackPointRotation;
+    private SpriteRenderer attackPointRenderer;
+    private float attackHitboxActiveTime = 0.2f;
+    private float attackTimer;
+    private bool canAttack;
 
     private int collisionCount = 0;
 
@@ -26,27 +40,93 @@ public class Player : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        health = maxHealth;
+
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+
+        attackPoint = GameObject.Find("AttackPoint") as GameObject;
+        attackPointCollider = attackPoint.GetComponent<BoxCollider2D>();
+        attackPointCollider.enabled = false;
+        attackPointRenderer = attackPoint.GetComponent<SpriteRenderer>();
+        attackPointRenderer.enabled = false;
+        attackTimer = 0f;
+        canAttack = true;
     }
 	
     void Update ()
     {
-        bool jumpButtonDownPressed = Input.GetKeyDown(KeyCode.Space);
+        if (isAlive)
+        {
+            bool jumpButtonDownPressed = Input.GetButtonDown("Jump");
+            requestJump = (requestJump || jumpButtonDownPressed) ? true : false;
 
-        requestJump = (requestJump || jumpButtonDownPressed) ? true : false;
+            float hor = Input.GetAxis("Horizontal");
+            float ver = Input.GetAxis("Vertical");
+
+            //Attack handling
+            if (canAttack)
+            {
+                if (hor > 0)
+                {
+                    attackPointOffset = new Vector2(0.65f, 0f);
+                    attackPointRotation = Quaternion.Euler(new Vector3(0f, 0f, 180f));
+                }
+                else
+                {
+                    attackPointOffset = new Vector2(-0.65f, 0f);
+                    attackPointRotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
+                }
+
+                if (ver > 0)
+                {
+                    attackPointOffset = new Vector2(0f, 0.8f);
+                    attackPointRotation = Quaternion.Euler(new Vector3(0f, 0f, 90f));
+                }
+            }
+
+            attackPoint.transform.localPosition = attackPointOffset;
+            attackPoint.transform.localRotation = attackPointRotation;
+
+            if (!canAttack)
+            {
+                attackTimer += Time.deltaTime;
+                //If the attack hitbox has been active for the specified amount of time...
+                if (attackTimer >= attackHitboxActiveTime)
+                {
+                    //...then reset the timer to 0, reset attack point collider and renderer, and enable attacking.
+                    canAttack = true;
+                    attackTimer = 0f;
+
+                    attackPointCollider.enabled = false;
+                    attackPointRenderer.enabled = false;
+                }
+            }
+
+            //Get player attack input
+            if (Input.GetButtonDown("Fire1"))
+            {
+                //If we can attack, show weapon and enable the attack hitbox
+                if (canAttack)
+                {
+                    attackPointCollider.enabled = true;
+                    attackPointRenderer.enabled = true;
+                    canAttack = false;
+                }
+            }
+        }
     }
 
 	// Rigidbody physics should be done in FixedUpdate
 	void FixedUpdate () {
-        print("RequestJump: " + requestJump + " CanJump: " + canJump + " CanDoubleJump: " + canDoubleJump);
+        //print("RequestJump: " + requestJump + " CanJump: " + canJump + " CanDoubleJump: " + canDoubleJump);
 
         // Get input
         float hor = Input.GetAxis("Horizontal");
         float ver = Input.GetAxis("Vertical");
-        bool jumpButtonDownPressed = Input.GetKeyDown(KeyCode.Space);
+        bool jumpButtonDownPressed = Input.GetButtonDown("Jump");
         requestJump = (requestJump || jumpButtonDownPressed) ? true : false;
-        bool jumpButtonCurrentlyPressed = Input.GetKey(KeyCode.Space);
+        bool jumpButtonCurrentlyPressed = Input.GetButton("Jump");
 
         // Horizontal
         Vector2 velocity = new Vector2(rb.velocity.x, rb.velocity.y);
@@ -90,6 +170,21 @@ public class Player : MonoBehaviour {
 
         // Reset jump capability
         canJump = false;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        isAlive = false;
+        //Nothing else yet. Do game over stuff in here or whatever.
     }
     
     void OnCollisionEnter2D(Collision2D collision)

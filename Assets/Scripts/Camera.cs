@@ -2,17 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Camera : MonoBehaviour {
+public class Camera : MonoBehaviour
+{
+    public GameObject targetObj;
 
-    public GameObject player;
+    public float horizontalOffset;
+
+    private Vector3 targetPos;
 
     // Use this for initialization
-    void Start () {
-	    
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        this.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 2, this.transform.position.z);
-	}
+    void Start()
+    {
+        targetPos = targetObj.transform.position;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        TrackPlayer();
+    }
+
+    void TrackPlayer()
+    {
+        targetPos = new Vector3(targetObj.transform.position.x, targetObj.transform.position.y, -10f);
+        transform.position = Vector3.Lerp(transform.position, targetPos, 0.05f);
+    }
 }
