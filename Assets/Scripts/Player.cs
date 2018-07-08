@@ -38,6 +38,11 @@ public class Player : MonoBehaviour {
 
     private bool requestJump = false;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     // Use this for initialization
     void Start () {
         health = maxHealth;

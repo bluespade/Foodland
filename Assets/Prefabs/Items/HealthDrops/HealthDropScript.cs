@@ -14,7 +14,6 @@ public class HealthDropScript : MonoBehaviour {
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        print("HEALTH TOUCHED");
         if (collision.gameObject.layer == (int)Layers.PLAYER)
         {
             Player p = collision.gameObject.GetComponent<Player>();

@@ -10,6 +10,11 @@ public class Camera : MonoBehaviour
 
     private Vector3 targetPos;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -26,5 +31,10 @@ public class Camera : MonoBehaviour
     {
         targetPos = new Vector3(targetObj.transform.position.x, targetObj.transform.position.y, -10f);
         transform.position = Vector3.Lerp(transform.position, targetPos, 0.05f);
+    }
+
+    public void SetCameraPosition(Vector3 vec)
+    {
+        transform.position = new Vector3(vec.x, vec.y, -10f);
     }
 }
