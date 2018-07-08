@@ -35,26 +35,6 @@ public class UICanvasController : MonoBehaviour {
         BeginFadeFromBlack();
 	}
 
-    void Update()
-    {
-        //if (fade)
-        //{
-        //    fadePanel.CrossFadeAlpha(1f, fadeTime, true);
-        //} else
-        //{
-        //    fadePanel.CrossFadeAlpha(0f, fadeTime, true);
-        //}
-        //print(fadePanelRenderer.GetAlpha());
-        //
-        //if (fadePanelRenderer.GetAlpha() == 1)
-        //{
-        //    fullyFaded = true;
-        //} else
-        //{
-        //    fullyFaded = false;
-        //}
-    }
-
     public void BeginFadeFromBlack()
     {
         StopCoroutine(FadeToBlack());
