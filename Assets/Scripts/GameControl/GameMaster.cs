@@ -12,8 +12,6 @@ public class GameMaster : MonoBehaviour {
     UICanvasController Canvas;
     public List<GameObject> Items;
 
-    bool waitingOnScreenFade = false;
-
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
