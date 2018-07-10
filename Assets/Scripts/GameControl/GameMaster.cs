@@ -71,7 +71,14 @@ public class GameMaster : MonoBehaviour {
             trigger = t.GetComponent<SceneTransitionTrigger>();
             if (trigger.GetId() == destinationTriggerId)
             {
-                player.transform.position = trigger.GetPlayerPlacementPoint();
+                RaycastHit2D hit = Physics2D.Raycast(trigger.GetPlayerPlacementPoint(), Vector2.down, 1000f);
+                if (hit)
+                {
+                    player.transform.position = hit.point;
+                } else
+                {
+                    player.transform.position = trigger.GetPlayerPlacementPoint();
+                }
                 cam.SetCameraPosition(player.transform.position);
                 return;
             }
