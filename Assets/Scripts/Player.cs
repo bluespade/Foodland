@@ -83,22 +83,22 @@ public class Player : MonoBehaviour {
             {
                 if (ver > 0)
                 {
-                    attackPointOffset = new Vector2(0f, 0.8f);
+                    attackPointOffset = new Vector2(0f, 1.2f);
                     attackPointRotation = Quaternion.Euler(new Vector3(0f, 0f, 90f));
                 } else
                 {
                     if (hor > 0)
                     {
-                        attackPointOffset = new Vector2(0.65f, 0f);
+                        attackPointOffset = new Vector2(0.65f, 0.4f);
                         attackPointRotation = Quaternion.Euler(new Vector3(0f, 0f, 180f));
-                        lastHorizontalAttackPointOffset = new Vector2(0.65f, 0f);
+                        lastHorizontalAttackPointOffset = new Vector2(0.65f, 0.4f);
                         lastHorizontalAttackPointRotation = Quaternion.Euler(new Vector3(0f, 0f, 180f));
                     }
                     else if (hor < 0)
                     {
-                        attackPointOffset = new Vector2(-0.65f, 0f);
+                        attackPointOffset = new Vector2(-0.65f, 0.4f);
                         attackPointRotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
-                        lastHorizontalAttackPointOffset = new Vector2(-0.65f, 0f);
+                        lastHorizontalAttackPointOffset = new Vector2(-0.65f, 0.4f);
                         lastHorizontalAttackPointRotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
                     } else
                     {
