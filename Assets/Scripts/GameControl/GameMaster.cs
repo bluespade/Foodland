@@ -25,6 +25,7 @@ public class GameMaster : MonoBehaviour {
         transitionTriggersBase = GameObject.Find("TransitionTriggers").transform;
 	}
 
+    #region Scene Transition Functions
     public void BeginSceneTransition(string sceneName, int destinationTriggerId)
     {
         StartCoroutine(LoadNextScene(sceneName, destinationTriggerId));
@@ -80,6 +81,8 @@ public class GameMaster : MonoBehaviour {
         player.transform.position = new Vector3(0f, 0f, 0f);
         cam.SetCameraPosition(player.transform.position);
     }
+
+#endregion
 
     int ItemStringToIndex(string str)
     {
