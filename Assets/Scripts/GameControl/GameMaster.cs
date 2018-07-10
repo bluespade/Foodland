@@ -82,8 +82,9 @@ public class GameMaster : MonoBehaviour {
         cam.SetCameraPosition(player.transform.position);
     }
 
-#endregion
+    #endregion
 
+    #region Item Functions
     int ItemStringToIndex(string str)
     {
         //DummyItem is always at index 0
@@ -99,4 +100,5 @@ public class GameMaster : MonoBehaviour {
     { 
         return Items[ItemStringToIndex(str)];
     }
+    #endregion
 }
