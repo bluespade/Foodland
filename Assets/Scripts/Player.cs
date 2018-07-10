@@ -11,6 +11,8 @@ public class Player : MonoBehaviour {
         DoubleJumping,
     }
 
+    GameMaster GM;
+
     //Player parameters
     public int maxHealth;
     private int health;
@@ -50,10 +52,15 @@ public class Player : MonoBehaviour {
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
-    }
 
-    // Use this for initialization
-    void Start () {
+        GM = GameObject.Find("GameMaster").GetComponent<GameMaster>();
+
+        //Destroy this instance if one already exists
+        if (GM.GetPlayerInstance() != null)
+        {
+            Destroy(gameObject);
+        }
+
         health = maxHealth;
 
         rb = GetComponent<Rigidbody2D>();
@@ -66,6 +73,11 @@ public class Player : MonoBehaviour {
         attackPointRenderer.enabled = false;
         attackTimer = 0f;
         canAttack = true;
+    }
+
+    // Use this for initialization
+    void Start () {
+        
     }
 	
     void Update ()

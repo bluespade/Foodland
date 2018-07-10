@@ -15,12 +15,15 @@ public class UICanvasController : MonoBehaviour {
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
-    }
 
-    // Use this for initialization
-    void Start () {
         //Get reference to the GameMaster instance
         GM = GameObject.Find("GameMaster").GetComponent<GameMaster>();
+
+        //Destroy this instance if one already exists
+        if (GM.GetCanvasInstance() != null)
+        {
+            Destroy(gameObject);
+        }
 
         //Get important child components
         fadePanel = transform.Find("CameraFadePanel").GetComponent<Image>();
@@ -31,8 +34,15 @@ public class UICanvasController : MonoBehaviour {
         {
             fadeAmountPerFrame = 1f;
         }
+    }
 
-        BeginFadeFromBlack();
+    // Use this for initialization
+    void Start () {
+        
+
+        
+
+        //BeginFadeFromBlack();
 	}
 
     public void BeginFadeFromBlack()

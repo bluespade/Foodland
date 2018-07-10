@@ -5,11 +5,18 @@ using UnityEngine;
 
 public class GameMaster : MonoBehaviour {
 
-    GameObject player;
+    public GameObject playerPrefab;
+    public GameObject mainCameraPrefab;
+    public GameObject canvasPrefab;
+
+    public static GameObject Player;
+    public static GameObject MainCamera;
+    public static GameObject Canvas;
+
     Camera cam;
     Transform transitionTriggersBase;
     List<Transform> sceneTransitionTriggers;
-    UICanvasController Canvas;
+    UICanvasController canvasController;
     public List<GameObject> Items;
 
     private void Awake()
@@ -19,11 +26,47 @@ public class GameMaster : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        player = GameObject.Find("Player");
-        Canvas = GameObject.Find("UserInterfaceCanvas").GetComponent<UICanvasController>();
-        cam = GameObject.Find("Main Camera").GetComponent<Camera>();
-        transitionTriggersBase = GameObject.Find("TransitionTriggers").transform;
+        //Player = GameObject.Find("Player");
+        //canvasController = GameObject.Find("UserInterfacecanvasController").GetComponent<UICanvasController>();
+        //cam = GameObject.Find("Main Camera").GetComponent<Camera>();
+        //transitionTriggersBase = GameObject.Find("TransitionTriggers").transform;
 	}
+
+    public void BeginGame(string sceneName, int startingTriggerId)
+    {
+        SetUpEssentialGameObjects();
+        BeginSceneTransition(sceneName, startingTriggerId);
+    }
+
+    public void SetUpEssentialGameObjects()
+    {
+        GameObject temp;
+
+        temp = Instantiate(playerPrefab);
+        Player = temp;
+        temp = Instantiate(mainCameraPrefab);
+        MainCamera = temp;
+        temp = Instantiate(canvasPrefab);
+        Canvas = temp;
+
+        cam = MainCamera.GetComponent<Camera>();
+        canvasController = Canvas.GetComponent<UICanvasController>();
+    }
+
+    public GameObject GetPlayerInstance()
+    {
+        return Player;
+    }
+
+    public GameObject GetMainCameraInstance()
+    {
+        return MainCamera;
+    }
+
+    public GameObject GetCanvasInstance()
+    {
+        return Canvas;
+    }
 
     #region Scene Transition Functions
     public void BeginSceneTransition(string sceneName, int destinationTriggerId)
@@ -33,8 +76,8 @@ public class GameMaster : MonoBehaviour {
 
     public IEnumerator LoadNextScene(string sceneName, int destinationTriggerId)
     {
-        Canvas.BeginFadeToBlack();
-        while (!Canvas.GetFadeStatus())
+        canvasController.BeginFadeToBlack();
+        while (!canvasController.GetFadeStatus())
         {
             yield return null;
         }
@@ -49,7 +92,7 @@ public class GameMaster : MonoBehaviour {
         GetSceneTransitionTriggers();
         PlacePlayerAtDestination(destinationTriggerId);
 
-        Canvas.BeginFadeFromBlack();
+        canvasController.BeginFadeFromBlack();
     }
 
     void GetSceneTransitionTriggers()
@@ -74,19 +117,19 @@ public class GameMaster : MonoBehaviour {
                 RaycastHit2D hit = Physics2D.Raycast(trigger.GetPlayerPlacementPoint(), Vector2.down, 1000f);
                 if (hit)
                 {
-                    player.transform.position = hit.point;
+                    Player.transform.position = hit.point;
                 } else
                 {
-                    player.transform.position = trigger.GetPlayerPlacementPoint();
+                    Player.transform.position = trigger.GetPlayerPlacementPoint();
                 }
-                cam.SetCameraPosition(player.transform.position);
+                cam.SetCameraPosition(Player.transform.position);
                 return;
             }
         }
 
         print("No destination trigger found - placing player at the origin!");
-        player.transform.position = new Vector3(0f, 0f, 0f);
-        cam.SetCameraPosition(player.transform.position);
+        Player.transform.position = new Vector3(0f, 0f, 0f);
+        cam.SetCameraPosition(Player.transform.position);
     }
 
     #endregion

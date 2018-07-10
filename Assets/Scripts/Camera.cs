@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Camera : MonoBehaviour
 {
+    GameMaster GM;
+
     public GameObject targetObj;
 
     public float horizontalOffset;
@@ -13,12 +15,23 @@ public class Camera : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
+
+        GM = GameObject.Find("GameMaster").GetComponent<GameMaster>();
+
+        //Destroy this instance if one already exists
+        if (GM.GetMainCameraInstance() != null)
+        {
+            Destroy(gameObject);
+        }
+        targetObj = GM.GetPlayerInstance();
+
+        targetPos = targetObj.transform.position;
     }
 
     // Use this for initialization
     void Start()
     {
-        targetPos = targetObj.transform.position;
+        
     }
 
     // Update is called once per frame
