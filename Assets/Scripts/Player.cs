@@ -11,17 +11,26 @@ public class Player : MonoBehaviour {
         DoubleJumping,
     }
 
+    //Player parameters
     public int maxHealth;
     private int health;
 
+    //Component references
     private Rigidbody2D rb;
     private SpriteRenderer sr;
+
+    //Horizontal movement variables
     private float horizontalSpeed = 7;
+
+    //Vertical movement and jumping variables
     private float verticalSpeed = 14;
     private float downForce = -100;
     private bool canJump = true;
     private bool canDoubleJump = true;
     private bool jumping = false;
+    private bool requestJump = false;
+
+    //Player state flags
     private bool isAlive = true;
 
     //Attack variables and references
@@ -29,14 +38,14 @@ public class Player : MonoBehaviour {
     private BoxCollider2D attackPointCollider;
     private Vector2 attackPointOffset;
     private Quaternion attackPointRotation;
+    private Vector3 lastHorizontalAttackPointOffset;
+    private Quaternion lastHorizontalAttackPointRotation;
     private SpriteRenderer attackPointRenderer;
     private float attackHitboxActiveTime = 0.2f;
     private float attackTimer;
     private bool canAttack;
 
     private int collisionCount = 0;
-
-    private bool requestJump = false;
 
     private void Awake()
     {
@@ -48,7 +57,7 @@ public class Player : MonoBehaviour {
         health = maxHealth;
 
         rb = GetComponent<Rigidbody2D>();
-        sr = GetComponent<SpriteRenderer>();
+        sr = transform.Find("Sprite").GetComponent<SpriteRenderer>();
 
         attackPoint = GameObject.Find("AttackPoint") as GameObject;
         attackPointCollider = attackPoint.GetComponent<BoxCollider2D>();
@@ -66,27 +75,36 @@ public class Player : MonoBehaviour {
             bool jumpButtonDownPressed = Input.GetButtonDown("Jump");
             requestJump = (requestJump || jumpButtonDownPressed) ? true : false;
 
-            float hor = Input.GetAxis("Horizontal");
-            float ver = Input.GetAxis("Vertical");
+            float hor = Input.GetAxisRaw("Horizontal");
+            float ver = Input.GetAxisRaw("Vertical");
 
             //Attack handling
             if (canAttack)
             {
-                if (hor > 0)
-                {
-                    attackPointOffset = new Vector2(0.65f, 0f);
-                    attackPointRotation = Quaternion.Euler(new Vector3(0f, 0f, 180f));
-                }
-                else
-                {
-                    attackPointOffset = new Vector2(-0.65f, 0f);
-                    attackPointRotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
-                }
-
                 if (ver > 0)
                 {
                     attackPointOffset = new Vector2(0f, 0.8f);
                     attackPointRotation = Quaternion.Euler(new Vector3(0f, 0f, 90f));
+                } else
+                {
+                    if (hor > 0)
+                    {
+                        attackPointOffset = new Vector2(0.65f, 0f);
+                        attackPointRotation = Quaternion.Euler(new Vector3(0f, 0f, 180f));
+                        lastHorizontalAttackPointOffset = new Vector2(0.65f, 0f);
+                        lastHorizontalAttackPointRotation = Quaternion.Euler(new Vector3(0f, 0f, 180f));
+                    }
+                    else if (hor < 0)
+                    {
+                        attackPointOffset = new Vector2(-0.65f, 0f);
+                        attackPointRotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
+                        lastHorizontalAttackPointOffset = new Vector2(-0.65f, 0f);
+                        lastHorizontalAttackPointRotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
+                    } else
+                    {
+                        attackPointOffset = lastHorizontalAttackPointOffset;
+                        attackPointRotation = lastHorizontalAttackPointRotation;
+                    }
                 }
             }
 
@@ -140,7 +158,7 @@ public class Player : MonoBehaviour {
         {
             sr.flipX = true;
         }
-        else
+        else if (hor < 0)
         {
             sr.flipX = false;
         }
