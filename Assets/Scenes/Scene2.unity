@@ -377,7 +377,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &397893982
 Prefab:
@@ -426,52 +426,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d078a49b41e4aea4aa4ed449e35c8716, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &432752062
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 432752063}
-  - component: {fileID: 432752064}
-  m_Layer: 0
-  m_Name: GameMaster
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &432752063
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 432752062}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.8151913, y: -0.27818924, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &432752064
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 432752062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfa30e8e8b60d3e4f97f04e14360d76f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 0}
-  mainCameraPrefab: {fileID: 0}
-  canvasControllerPrefab: {fileID: 0}
-  Items:
-  - {fileID: 1846893305959860, guid: 3d927f2170534ea41b2c9f70ad99b260, type: 2}
-  - {fileID: 1801216190753580, guid: c91b06fa5f3e9344f90ce50298b37944, type: 2}
 --- !u!1001 &550421512
 Prefab:
   m_ObjectHideFlags: 0
@@ -828,7 +782,7 @@ Prefab:
     - target: {fileID: 224235589264793534, guid: e20f2763bbc03344fbc9cc8cb75d0e58,
         type: 2}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 224235589264793534, guid: e20f2763bbc03344fbc9cc8cb75d0e58,
         type: 2}
@@ -1174,7 +1128,7 @@ Transform:
   m_Children:
   - {fileID: 1958939406}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1958939405
 Prefab:

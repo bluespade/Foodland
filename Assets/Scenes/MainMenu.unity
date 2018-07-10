@@ -221,9 +221,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfa30e8e8b60d3e4f97f04e14360d76f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 0}
-  mainCameraPrefab: {fileID: 0}
-  canvasPrefab: {fileID: 0}
+  playerPrefab: {fileID: 1410569298615892, guid: 2409b3694a24b764eaa5442020b7a8a5,
+    type: 2}
+  mainCameraPrefab: {fileID: 1939149345664586, guid: 92cbd4da3fcf22541b8588c5bda6bde5,
+    type: 2}
+  canvasPrefab: {fileID: 1712677097820262, guid: e20f2763bbc03344fbc9cc8cb75d0e58,
+    type: 2}
   Items:
   - {fileID: 1846893305959860, guid: 3d927f2170534ea41b2c9f70ad99b260, type: 2}
   - {fileID: 1801216190753580, guid: c91b06fa5f3e9344f90ce50298b37944, type: 2}
