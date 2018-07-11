@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour {
-    private int enemyLayer = 9;
 
 	// Use this for initialization
 	void Start () {
@@ -18,7 +17,7 @@ public class Weapon : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D collision)
     {
         print("Collide");
-        if (collision.gameObject.layer == enemyLayer)
+        if (collision.gameObject.layer == (int)Layers.ENEMY)
         {
             Enemy enemyScript = collision.gameObject.GetComponent<Enemy>();
             enemyScript.TakeDamage(5);
