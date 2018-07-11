@@ -12,8 +12,8 @@ public class Loader : MonoBehaviour
         if (GameMaster.instance == null)
         {
             Instantiate(gameMaster);
+            GameMaster.instance.SetUpEssentialGameObjects();
+            GameMaster.instance.GetCanvasInstance().GetComponent<UICanvasController>().BeginFadeFromBlack();
         }
-        GameMaster.instance.SetUpEssentialGameObjects();
-        GameMaster.instance.GetCanvasInstance().GetComponent<UICanvasController>().BeginFadeFromBlack();
     }
 }
