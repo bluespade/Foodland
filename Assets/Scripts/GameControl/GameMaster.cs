@@ -13,7 +13,7 @@ public class GameMaster : MonoBehaviour {
     public static GameObject MainCamera;
     public static GameObject Canvas;
 
-    Camera cam;
+    Camera camScript;
     Transform transitionTriggersBase;
     List<Transform> sceneTransitionTriggers;
     UICanvasController canvasController;
@@ -40,16 +40,11 @@ public class GameMaster : MonoBehaviour {
 
     public void SetUpEssentialGameObjects()
     {
-        GameObject temp;
+        Player = Instantiate(playerPrefab);
+        MainCamera = Instantiate(mainCameraPrefab);
+        Canvas = Instantiate(canvasPrefab);
 
-        temp = Instantiate(playerPrefab);
-        Player = temp;
-        temp = Instantiate(mainCameraPrefab);
-        MainCamera = temp;
-        temp = Instantiate(canvasPrefab);
-        Canvas = temp;
-
-        cam = MainCamera.GetComponent<Camera>();
+        camScript = MainCamera.GetComponent<Camera>();
         canvasController = Canvas.GetComponent<UICanvasController>();
     }
 
@@ -122,14 +117,14 @@ public class GameMaster : MonoBehaviour {
                 {
                     Player.transform.position = trigger.GetPlayerPlacementPoint();
                 }
-                cam.SetCameraPosition(Player.transform.position);
+                camScript.SetCameraPosition(Player.transform.position);
                 return;
             }
         }
 
         print("No destination trigger found - placing player at the origin!");
         Player.transform.position = new Vector3(0f, 0f, 0f);
-        cam.SetCameraPosition(Player.transform.position);
+        camScript.SetCameraPosition(Player.transform.position);
     }
 
     #endregion

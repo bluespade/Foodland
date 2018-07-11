@@ -6,6 +6,9 @@ public enum Layers {
     PARALLAX = 8,
     ENEMY,
     PLAYER,
+    PICKUP,
+    SCENE_TRANSITION,
+    ATTACK_HITBOX,
     UNIMPLEMENTED
 }
 
