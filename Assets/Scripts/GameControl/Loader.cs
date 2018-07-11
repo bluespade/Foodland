@@ -13,7 +13,7 @@ public class Loader : MonoBehaviour
         {
             Instantiate(gameMaster);
         }
-
-        gameMaster.GetComponent<GameMaster>().BeginGame(this.gameObject.scene.name, 0);
+        GameMaster.instance.SetUpEssentialGameObjects();
+        GameMaster.instance.GetCanvasInstance().GetComponent<UICanvasController>().BeginFadeFromBlack();
     }
 }

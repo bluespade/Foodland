@@ -9,54 +9,46 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1478050878470380}
+  m_RootGameObject: {fileID: 1954959540577518}
   m_IsPrefabParent: 1
---- !u!1 &1478050878470380
+--- !u!1 &1954959540577518
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4711607598048488}
-  - component: {fileID: 114944696384136786}
+  - component: {fileID: 4294038613535830}
+  - component: {fileID: 114236451344810666}
   m_Layer: 0
-  m_Name: GameMaster
+  m_Name: Loader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4711607598048488
+--- !u!4 &4294038613535830
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1478050878470380}
+  m_GameObject: {fileID: 1954959540577518}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.8151913, y: -0.27818924, z: 0}
+  m_LocalPosition: {x: -10.897711, y: -2.2258494, z: 6.743675}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114944696384136786
+--- !u!114 &114236451344810666
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1478050878470380}
+  m_GameObject: {fileID: 1954959540577518}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fbe33a9aee297c48919afc034e532aa, type: 3}
+  m_Script: {fileID: 11500000, guid: 66c10f9e650690a40955ff5442d18a79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 1410569298615892, guid: 2409b3694a24b764eaa5442020b7a8a5,
-    type: 2}
-  mainCameraPrefab: {fileID: 1939149345664586, guid: 92cbd4da3fcf22541b8588c5bda6bde5,
-    type: 2}
-  canvasPrefab: {fileID: 1712677097820262, guid: e20f2763bbc03344fbc9cc8cb75d0e58,
-    type: 2}
-  Items:
-  - {fileID: 1846893305959860, guid: 3d927f2170534ea41b2c9f70ad99b260, type: 2}
-  - {fileID: 1801216190753580, guid: c91b06fa5f3e9344f90ce50298b37944, type: 2}
+  gameMaster: {fileID: 1478050878470380, guid: 07f4ebea3e46d8d429a628b4993a38f7, type: 2}

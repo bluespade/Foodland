@@ -37,6 +37,8 @@ public class GameMaster : MonoBehaviour {
         }
 
         DontDestroyOnLoad(gameObject);
+
+        this.gameObject.name = "GameMaster";
     }
 
     // Use this for initialization
